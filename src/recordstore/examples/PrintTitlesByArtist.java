@@ -11,21 +11,21 @@ public class PrintTitlesByArtist {
 
 	public static void main(String[] args) throws SQLException {
 		String sql = "SELECT * FROM Album WHERE ArtistId = (SELECT ArtistId FROM Artist WHERE Name = ?);";
-		
+
 		ChinookDatabase db = new ChinookDatabase();
 		Connection connection = db.connect();
-		
+
 		PreparedStatement statement = connection.prepareStatement(sql);
-		
+
 		String input = "Metallica";
-		
+
 		statement.setString(1, input);
-		
+
 		ResultSet results = statement.executeQuery();
-		
-		while(results.next()) {
+
+		while (results.next()) {
 			System.out.println(results.getString("Title"));
-			
+
 		}
 		db.close(results, statement, connection);
 	}

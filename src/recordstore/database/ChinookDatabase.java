@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class ChinookDatabase {
 	private static final String URL = "jdbc:sqlite:M:\\\\sqlite\\\\Chinook_Sqlite.sqlite";
-	
+
 	public Connection connect() {
 		try {
 			Class.forName("org.sqlite.JDBC");

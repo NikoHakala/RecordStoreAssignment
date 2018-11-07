@@ -12,10 +12,10 @@ public class HelloServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		
+
 		String nameParameter = req.getParameter("name");
-		
-		resp.getWriter().println("Hello "+ nameParameter);
-		
+
+		resp.getWriter().println("Hello " + nameParameter);
+
 	}
 }

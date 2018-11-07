@@ -14,7 +14,7 @@ public class ArtistDaoTest {
 	public void testArtistListIsNotEmpty() {
 		ArtistDao dao = new ArtistDao();
 		List<Artist> all = dao.getAllArtists();
-		
+
 		all.isEmpty();
 	}
 

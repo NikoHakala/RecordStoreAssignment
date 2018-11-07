@@ -18,16 +18,15 @@ public class ArtistListServlet extends HttpServlet {
 
 	private ChinookDatabase db = new ChinookDatabase();
 	private ArtistDao artistDao = new ArtistDao(db);
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Artist> list = artistDao.getAllArtists();
-		
+
 		for (Artist a : list) {
 			resp.getWriter().println(a.getName());
 		}
-		
-		
-	}	
-	
+
+	}
+
 }
