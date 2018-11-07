@@ -11,16 +11,22 @@ import recordstore.database.ChinookDatabase;
 import recordstore.models.Artist;
 
 public class ArtistDao {
+	
+	private ChinookDatabase db;
+	
+	public ArtistDao(ChinookDatabase db) {
+		this.db = db;
+	}
 
 	public List<Artist> getAllArtists() {
-		ArrayList<Artist> list = new ArrayList();
-		ChinookDatabase db = new ChinookDatabase();
+		
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
 		ResultSet results = null;
+		ArrayList<Artist> list = new ArrayList();
 		
 		try {
-		statement = connection.prepareStatement("SELECT * FROM Artist ORDER BY Artist;");
+		statement = connection.prepareStatement("SELECT * FROM Artist;");
 		results = statement.executeQuery();
 		
 			while(results.next()) {
