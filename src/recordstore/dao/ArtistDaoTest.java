@@ -1,21 +1,37 @@
 package recordstore.dao;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import recordstore.database.ChinookDatabase;
 import recordstore.models.Artist;
 
 public class ArtistDaoTest {
 
-	@Test
-	public void testArtistListIsNotEmpty() {
-		ArtistDao dao = new ArtistDao();
-		List<Artist> all = dao.getAllArtists();
+    private ArtistDao dao;
 
-		all.isEmpty();
-	}
+    @BeforeEach
+    public void setUp() {
+        ChinookDatabase database = new ChinookDatabase();
+        this.dao = new ArtistDao(database);
+    }
 
+    @Test
+    public void testArtistListIsNotEmpty() {
+        List<Artist> all = dao.getAllArtists();
+
+        assertFalse(all.isEmpty()); // sama kuin assertEquals(false, all.isEmpty());
+    }
+
+    @Test
+    public void testTheNameOfTheFirstArtist() {
+        List<Artist> all = dao.getAllArtists();
+
+        assertEquals("A Cor Do Som", all.get(0).getName());
+    }
 }

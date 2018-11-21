@@ -1,8 +1,10 @@
 package recordstore.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,20 +15,19 @@ import recordstore.dao.ArtistDao;
 import recordstore.database.ChinookDatabase;
 import recordstore.models.Artist;
 
-@WebServlet("/Artists")
+@WebServlet("/artists")
 public class ArtistListServlet extends HttpServlet {
-
-	private ChinookDatabase db = new ChinookDatabase();
-	private ArtistDao artistDao = new ArtistDao(db);
+	private ArtistDao artistDao = new ArtistDao(new ChinookDatabase());
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Artist> list = artistDao.getAllArtists();
-
-		for (Artist a : list) {
-			resp.getWriter().println(a.getName());
-		}
-
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
+		
+		List<Artist> artists = artistDao.getAllArtists();
+		
+		req.setAttribute("artists", artists);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/ArtistList.jsp");
+		dispatcher.include(req, resp);
 	}
-
 }
