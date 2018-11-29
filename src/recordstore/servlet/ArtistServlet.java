@@ -1,7 +1,6 @@
 package recordstore.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -15,20 +14,26 @@ import recordstore.dao.ArtistDao;
 import recordstore.database.ChinookDatabase;
 import recordstore.models.Artist;
 
-@WebServlet("/artists")
-public class ArtistListServlet extends HttpServlet {
+
+@WebServlet("/Artist")
+public class ArtistServlet extends HttpServlet {
 	
 	private ArtistDao artistDao = new ArtistDao(new ChinookDatabase());
-
+	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
-			throws ServletException, IOException {
+			throws IOException, ServletException {
+		long id = Long.parseLong(req.getParameter("id"));
 		
-		List<Artist> artists = artistDao.getAllArtists();
+		Artist a = artistDao.findArtist(id);
+		// resp.getWriter().println(a.getName());
 		
-		req.setAttribute("artists", artists);
+		req.setAttribute("artist", a);
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/ArtistList.jsp");
 		dispatcher.include(req, resp);
 	}
 }
+

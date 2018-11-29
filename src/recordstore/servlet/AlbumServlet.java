@@ -1,8 +1,6 @@
 package recordstore.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,24 +9,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import recordstore.dao.AlbumDao;
 import recordstore.dao.ArtistDao;
 import recordstore.database.ChinookDatabase;
+import recordstore.models.Album;
 import recordstore.models.Artist;
 
-@WebServlet("/artists")
-public class ArtistListServlet extends HttpServlet {
+@WebServlet("/album")
+public class AlbumServlet extends HttpServlet {
 	
-	private ArtistDao artistDao = new ArtistDao(new ChinookDatabase());
+	private AlbumDao albumDao = new AlbumDao(new ChinookDatabase());
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
-			throws ServletException, IOException {
+			throws IOException, ServletException {
+		long id = Long.parseLong(req.getParameter("AlbumId"));
 		
-		List<Artist> artists = artistDao.getAllArtists();
+		Album a = albumDao.findAlbum(id);
+		resp.getWriter().println(a.getTitle());
 		
-		req.setAttribute("artists", artists);
+		req.setAttribute("album", a);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/ArtistList.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/Album.jsp");
 		dispatcher.include(req, resp);
 	}
+
 }
