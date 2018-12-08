@@ -7,8 +7,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Artist List</title>
 </head>
+
 <body>
 Kaikki artistit:
+<form action="/RecordStore/artist" method="get">
+	Hae Artisti Idllä<br>
+	<input type="text" name="id">
+	<input type="submit" value="Submit">
+</form>
+
 	<ul>
 	<c:forEach items="${ artists }" var="artists">
 		<li>
@@ -17,4 +24,5 @@ Kaikki artistit:
 	</c:forEach>
 	</ul>
 </body>
+
 </html>

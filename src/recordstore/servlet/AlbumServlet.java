@@ -25,10 +25,10 @@ public class AlbumServlet extends HttpServlet {
 			throws IOException, ServletException {
 		long id = Long.parseLong(req.getParameter("AlbumId"));
 		
-		Album a = albumDao.findAlbum(id);
-		resp.getWriter().println(a.getTitle());
+		Album aa = albumDao.findAlbum(id);
+		resp.getWriter().println(aa.getTitle());
 		
-		req.setAttribute("album", a);
+		req.setAttribute("albums", aa);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/Album.jsp");
 		dispatcher.include(req, resp);

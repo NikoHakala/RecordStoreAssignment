@@ -8,13 +8,9 @@
 <title>Albumit?</title>
 </head>
 <body>
-Kaikki artistit:
-	<ul>
-	<c:forEach items="${ albums }" var="album">
-		<li>
-			<c:out value="${ album.getTitle() }" />
-		</li>
-	</c:forEach>
-	</ul>
+Albumit:
+
+
+
 </body>
 </html>

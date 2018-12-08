@@ -25,7 +25,7 @@ public class AlbumDao {
 		ResultSet results = null;
 
 		try {
-			statement = connection.prepareStatement("SELECT * FROM Album WHERE AlbumId = ?");
+			statement = connection.prepareStatement("SELECT * FROM Album WHERE Artistid = ?");
 			statement.setLong(1, id);
 			results = statement.executeQuery();
 

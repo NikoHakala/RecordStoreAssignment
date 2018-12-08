@@ -24,7 +24,7 @@ public class ArtistDao {
         ResultSet results = null;
 
         try {
-            statement = connection.prepareStatement("SELECT * FROM Artist WHERE ArtistId = ?");
+            statement = connection.prepareStatement("SELECT * FROM Artist WHERE Artistid = ?");
             statement.setLong(1, id);
             results = statement.executeQuery();
 

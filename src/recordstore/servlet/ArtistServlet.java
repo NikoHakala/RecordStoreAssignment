@@ -10,16 +10,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import recordstore.dao.AlbumDao;
 import recordstore.dao.ArtistDao;
 import recordstore.database.ChinookDatabase;
+import recordstore.models.Album;
 import recordstore.models.Artist;
 
 
-@WebServlet("/Artist")
+@WebServlet("/artist")
 public class ArtistServlet extends HttpServlet {
 	
 	private ArtistDao artistDao = new ArtistDao(new ChinookDatabase());
-	
+	private AlbumDao albumDao = new AlbumDao(new ChinookDatabase());
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
@@ -27,12 +29,13 @@ public class ArtistServlet extends HttpServlet {
 		long id = Long.parseLong(req.getParameter("id"));
 		
 		Artist a = artistDao.findArtist(id);
+		Album aa = albumDao.findAlbum(id);
 		// resp.getWriter().println(a.getName());
 		
-		req.setAttribute("artist", a);
+		req.setAttribute("artists", a);
+		req.setAttribute("albums", aa);
 		
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/ArtistList.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/Artist.jsp");
 		dispatcher.include(req, resp);
 	}
 }

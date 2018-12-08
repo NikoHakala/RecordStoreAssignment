@@ -8,7 +8,7 @@
 <title>Albumit?</title>
 </head>
 <body>
-Kaikki artistit:
+Kaikki albumit:
 	<ul>
 	<c:forEach items="${ album }" var="album">
 		<li>
