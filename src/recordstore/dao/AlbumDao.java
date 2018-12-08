@@ -49,10 +49,10 @@ public class AlbumDao {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
 		ResultSet results = null;
-		ArrayList<Album> list = new ArrayList();
+		List<Album> list = new ArrayList();
 
 		try {
-			statement = connection.prepareStatement("SELECT * FROM Album;");
+			statement = connection.prepareStatement("SELECT * FROM Album");
 			results = statement.executeQuery();
 
 			while (results.next()) {

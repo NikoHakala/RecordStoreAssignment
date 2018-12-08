@@ -29,11 +29,11 @@ public class ArtistServlet extends HttpServlet {
 		long id = Long.parseLong(req.getParameter("id"));
 		
 		Artist a = artistDao.findArtist(id);
-		Album aa = albumDao.findAlbum(id);
+		Album albums = albumDao.findAlbum(id);
 		// resp.getWriter().println(a.getName());
 		
 		req.setAttribute("artists", a);
-		req.setAttribute("albums", aa);
+		req.setAttribute("albums", albums);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/Artist.jsp");
 		dispatcher.include(req, resp);

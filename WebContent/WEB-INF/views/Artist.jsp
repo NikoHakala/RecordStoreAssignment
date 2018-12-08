@@ -24,6 +24,5 @@ Artist:<br>
 Albums:<br>
 <c:out value="${ albums.getTitle() }" />
 
-
 </body>
 </html>
