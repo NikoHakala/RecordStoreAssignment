@@ -10,7 +10,7 @@
 
 <body>
 Kaikki artistit:
-<form action="/RecordStore/artist" method="get">
+<form action="/RecordStoreAssignment/artist" method="get">
 	Hae Artisti Idllä<br>
 	<input type="text" name="id">
 	<input type="submit" value="Submit">
@@ -19,7 +19,7 @@ Kaikki artistit:
 	<ul>
 	<c:forEach items="${ artists }" var="artists">
 		<li>
-			<c:out value="${ artists.getName() }" />
+			<a href="/RecordStoreAssignment/artist?id=${ artists.getId() }"><c:out value="${ artists.getName() }" /></a>
 		</li>
 	</c:forEach>
 	</ul>

@@ -9,20 +9,30 @@
 </head>
 <body>
 
-<form action="/RecordStore/artist" method="get">
+<form action="/RecordStoreAssignment/artist" method="get">
 	Hae Artisti Idllä<br>
 	<input type="text" name="id" >
 	<input type="submit" value="Submit" >
 </form>
 
-<form action="/RecordStore/artists" method="get">
+<form action="/RecordStoreAssignment/artists" method="get">
 	<input type="submit" value="back">
 </form>
-Artist:<br>
+<br>
+Artist:
+<br>
 <c:out value="${ artists.getName() }" />
 <br>
-Albums:<br>
-<c:out value="${ albums.getTitle() }" />
+<br>
+Albums:
+<br>
+<ul>
+<c:forEach items="${ albums }" var="albums">
+		<li>
+			<c:out value="${ albums.getTitle() }" />
+		</li>
+</c:forEach>
+</ul>
 
 </body>
 </html>

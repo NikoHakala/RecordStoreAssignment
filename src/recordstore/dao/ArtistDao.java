@@ -50,7 +50,7 @@ public class ArtistDao {
 		ArrayList<Artist> list = new ArrayList();
 
 		try {
-			statement = connection.prepareStatement("SELECT * FROM Artist;");
+			statement = connection.prepareStatement("SELECT * FROM Artist");
 			results = statement.executeQuery();
 
 			while (results.next()) {

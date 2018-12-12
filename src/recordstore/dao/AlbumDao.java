@@ -19,29 +19,35 @@ public class AlbumDao {
 		this.db = db;
 	}
 
-	public Album findAlbum(long id) {
+	public List<Album> findAlbum(long id) {
+		
+		ArrayList<Album> albumlist = new ArrayList<Album>();
+		
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
 		ResultSet results = null;
-
+		
+		
+		
 		try {
 			statement = connection.prepareStatement("SELECT * FROM Album WHERE Artistid = ?");
 			statement.setLong(1, id);
 			results = statement.executeQuery();
 
-			if (results.next()) {
+			while (results.next()) {
+				long albumId = results.getLong("AlbumId");
 				long artistId = results.getLong("ArtistId");
 				String title = results.getString("Title");
-				Album album = new Album(id, artistId, title);
-				return album;
-			} else {
-				return null;
+				albumlist.add( new Album(albumId, artistId, title));
+				
+			
 			}
-		} catch (SQLException e) {
+			} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
 			db.close(results, statement, connection);
 		}
+		return albumlist;
 	}
 
 	public List<Album> getAllAlbums() {
@@ -52,7 +58,7 @@ public class AlbumDao {
 		List<Album> list = new ArrayList();
 
 		try {
-			statement = connection.prepareStatement("SELECT * FROM Album");
+			statement = connection.prepareStatement("SELECT * FROM Album WHERE artistId = ?");
 			results = statement.executeQuery();
 
 			while (results.next()) {

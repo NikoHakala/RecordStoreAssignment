@@ -1,6 +1,7 @@
 package recordstore.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,8 +26,8 @@ public class AlbumServlet extends HttpServlet {
 			throws IOException, ServletException {
 		long id = Long.parseLong(req.getParameter("AlbumId"));
 		
-		Album aa = albumDao.findAlbum(id);
-		resp.getWriter().println(aa.getTitle());
+		List<Album> aa = albumDao.findAlbum(id);
+		//resp.getWriter().println(aa.getTitle());
 		
 		req.setAttribute("albums", aa);
 		
